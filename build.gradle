@@ -1,0 +1,42 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "1.4.32"
+    id 'org.jetbrains.kotlin.plugin.serialization' version "1.4.30"
+    id 'application'
+}
+
+def ktor_version = "1.5.4"
+def logback_version = "1.2.3"
+
+group 'me.katsumag'
+version '1.0-SNAPSHOT'
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url "https://kotlin.bintray.com/kotlinx"
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    implementation "io.ktor:ktor-server-core:$ktor_version"
+    implementation "io.ktor:ktor-server-netty:$ktor_version"
+    implementation "ch.qos.logback:logback-classic:$logback_version"
+    implementation "io.ktor:ktor-serialization:$ktor_version"
+
+    testImplementation "io.ktor:ktor-server-tests:$ktor_version"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+application {
+    mainClassName = 'com.jetbrains.handson.httpapi.ApplicationKt'
+}
